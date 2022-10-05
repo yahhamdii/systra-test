@@ -1,13 +1,8 @@
 import { useState, useRef } from "react";
 
 import generateBoardWithRadomColors from './generateBoardWithRadomColors';
-import recurring from "./recurring";
-import generateResult from "./generateResult";
+import LargestAreaMatrix from "./LargestAreaMatrix";
 import "./styles.css";
-
-
-
-
 
 const Cell = ({ color }) => {
   return <div className="cell" style={{ background: color }} />;
@@ -39,6 +34,11 @@ const App = () => {
     }
   };
  
+var element =  widthInput?.current?.value?widthInput?.current?.value:defaultValue.width
+  var mat = board?board.reduce((rows, key, index) => (index % element === 0 ? rows.push([key]) 
+  : rows[rows.length-1].push(key)) && rows, []):[];
+ 
+
   return (
     <div>
       <header>
@@ -91,8 +91,7 @@ const App = () => {
         ))}
       </div>
       
-      <pre> {JSON.stringify(recurring(board), null, 2)} </pre>
-      <h1>{generateResult(recurring(board))}</h1>
+      <h1> {LargestAreaMatrix(mat)} </h1>
     </div>
   );
 }
